@@ -5,17 +5,13 @@ import { Modal } from "antd";
 
 import { CafesContext } from "../context";
 import { CafeType } from "../../../utils/types";
-import { FieldConstant } from "../../../utils/constant";
+import { FieldConstant, resetConfirm } from "../../../utils/constant";
 import {
   addCafeRequest,
   updateCafeRequest,
 } from "../../../store/cafes/actions";
 import { ExclamationCircleFilled } from "@ant-design/icons";
-import {
-  isUndefinedOrEmpty,
-  isValueChanged,
-  resetConfirm,
-} from "../../../utils/helper";
+import { isUndefinedOrEmpty, isValueChanged } from "../../../utils/helper";
 import { getCafesSelector } from "../../../store/cafes/selectors";
 
 const useFormAction = () => {
@@ -72,30 +68,21 @@ const useFormAction = () => {
       FieldConstant.LOCATION,
     ]);
 
-    isValueChanged(employeeFields) && isUndefinedOrEmpty(cafeId)
-      ? confirm({
-          ...resetConfirm,
-          icon: <ExclamationCircleFilled />,
-          onOk() {
-            handleClose();
-          },
-        })
-      : handleClose();
+    if (isValueChanged(employeeFields) && isUndefinedOrEmpty(cafeId)) {
+      confirm({
+        ...resetConfirm,
+        icon: <ExclamationCircleFilled />,
+        onOk: handleClose,
+      });
+    } else {
+      handleClose();
+    }
   };
-
-  const onErrorAlertDisplay = () =>
-    confirm({
-      ...resetConfirm,
-      icon: <ExclamationCircleFilled />,
-      onOk() {
-        handleClose();
-      },
-    });
 
   return {
     handleFormSubmit,
     onExit,
-    onErrorAlertDisplay,
+
     cafeId,
     setFormValues,
   };

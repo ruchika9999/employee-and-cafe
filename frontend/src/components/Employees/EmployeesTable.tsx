@@ -7,8 +7,8 @@ import { ExclamationCircleFilled } from "@ant-design/icons";
 import { deleteEmployeeRequest } from "../../store/employees/actions";
 import { fetchCafesRequest } from "../../store/cafes/actions";
 
-import { deleteConfirm } from "../../utils/helper";
 import { column } from "./helper";
+import { deleteConfirm } from "../../utils/constant";
 
 import { EmployeesContext } from "./context";
 import { getEmployeesSelector } from "../../store/employees/selectors";

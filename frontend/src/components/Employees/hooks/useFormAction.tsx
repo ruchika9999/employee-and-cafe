@@ -6,16 +6,12 @@ import { Modal } from "antd";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { EmployeeType } from "../../../utils/types";
 import { EmployeesContext } from "../context";
-import { FieldConstant } from "../../../utils/constant";
+import { FieldConstant, resetConfirm } from "../../../utils/constant";
 import {
   addEmployeeRequest,
   updateEmployee,
 } from "../../../store/employees/actions";
-import {
-  isUndefinedOrEmpty,
-  isValueChanged,
-  resetConfirm,
-} from "../../../utils/helper";
+import { isUndefinedOrEmpty, isValueChanged } from "../../../utils/helper";
 import { getEmployeesSelector } from "../../../store/employees/selectors";
 
 const useFormAction = () => {
@@ -96,15 +92,15 @@ const useFormAction = () => {
       FieldConstant.CAFE_OPTION,
     ]);
 
-    isValueChanged(employeeFields) && isUndefinedOrEmpty(employeeId)
-      ? confirm({
-          ...resetConfirm,
-          icon: <ExclamationCircleFilled />,
-          onOk() {
-            handleClose();
-          },
-        })
-      : handleClose();
+    if (isValueChanged(employeeFields) && isUndefinedOrEmpty(employeeId)) {
+      confirm({
+        ...resetConfirm,
+        icon: <ExclamationCircleFilled />,
+        onOk: handleClose,
+      });
+    } else {
+      handleClose();
+    }
   };
 
   return {

@@ -1,3 +1,4 @@
+import { ModalFuncProps } from "antd";
 import z from "zod";
 
 export const GOOGLE_MAP_API_KEY = "AIzaSyAUDllPJzvIBlJJ1xuCDXFiuesBsEgXLuw";
@@ -40,6 +41,21 @@ export enum GenderOptions {
   MALE = "Male",
   FEMALE = "Female",
 }
+export const deleteConfirm: ModalFuncProps = {
+  okText: "Yes",
+  okType: "danger",
+  cancelText: "No",
+  content: "This action cannot be undone.",
+};
+
+export const resetConfirm: ModalFuncProps = {
+  title: "Do you want to discard changes?",
+  content: "You have unsaved changes that will be discarded.",
+  okText: "Yes",
+  okType: "danger",
+  cancelText: "No",
+};
+
 
 export const gender = Object.keys(GenderOptions).filter((item) => {
   return isNaN(Number(item));

@@ -1,4 +1,5 @@
 const { Cafe } = require("../models/cafeModel");
+const { validationResult } = require("express-validator");
 
 const asyncHandler = require("express-async-handler");
 const { throwError } = require("../utils/helper");

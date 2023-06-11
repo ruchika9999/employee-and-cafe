@@ -1,9 +1,7 @@
-import { ModalFuncProps } from "antd";
-
 import { EMPTY, GenderOptions } from "./constant";
-import { CafeType } from "./types";
+import { CafeType, ErrorObject } from "./types";
 
-export const gender = Object.values(GenderOptions).filter((item) => {
+export const genderOption = Object.values(GenderOptions).filter((item) => {
   return isNaN(Number(item));
 });
 
@@ -32,17 +30,9 @@ export const getCafes = (cafes: CafeType[]) => {
   });
 };
 
-export const deleteConfirm: ModalFuncProps = {
-  okText: "Yes",
-  okType: "danger",
-  cancelText: "No",
-  content: "This action cannot be undone.",
-};
-
-export const resetConfirm: ModalFuncProps = {
-  title: "Do you want to discard changes?",
-  content: "You have unsaved changes that will be discarded.",
-  okText: "Yes",
-  okType: "danger",
-  cancelText: "No",
+export const isErrorOnSubmit = (value: ErrorObject) => {
+  const errorMessages: (string | undefined)[] = Object.entries(value).map(
+    ([key, value]) => value.message
+  );
+  return errorMessages.length > 0;
 };

@@ -10,3 +10,13 @@ export type EmployeeType = z.infer<typeof employeeSchema>;
 export type CafeLocationType = z.infer<typeof searchSchema>;
 
 export type ResetAction = () => AnyAction;
+
+export interface ErrorObject {
+    [key: string]: {
+      message: string;
+      type: string;
+      ref: {
+        name: string;
+      };
+    };
+  }

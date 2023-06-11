@@ -11,8 +11,7 @@ import {
   fetchCafesRequest,
 } from "../../store/cafes/actions";
 import { column } from "./helper";
-import { deleteConfirm } from "../../utils/helper";
-import { ROUTE } from "../../utils/constant";
+import { ROUTE , deleteConfirm } from "../../utils/constant";
 import { CafeType } from "../../utils/types";
 import { getCafesSelector } from "../../store/cafes/selectors";
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { validateCafeCreate } = require("../middleware/cafeValidation");
+const { requestValidator } = require("../middleWare/requestValidator");
+const { cafeCreateValidationRules } = require("../validation/cafeValidation");
 
 const {
   getCafes,
@@ -10,7 +11,7 @@ const {
 } = require("../controllers/cafeController");
 
 router.get("/", getCafes);
-router.post("/", validateCafeCreate, createCafe);
+router.post("/", cafeCreateValidationRules, requestValidator, createCafe);
 router.put("/:id", updateCafe);
 router.delete("/:id", deleteCafe);
 

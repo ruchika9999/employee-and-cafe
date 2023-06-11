@@ -1,5 +1,5 @@
-import { memo, useContext } from "react";
-import { Button, Col, Divider, Drawer, Form, Row, Space } from "antd";
+import { memo, useContext, useEffect, useState } from "react";
+import { Button, Col, Divider, Drawer, Form, Row, Space, Alert } from "antd";
 import {
   FormProvider,
   SubmitErrorHandler,
@@ -12,24 +12,38 @@ import TextInput from "../Common/Inputs/TextInput";
 import TextAreaInput from "../Common/Inputs/TextAreaInput";
 import ImageUpload from "../Common/Inputs/ImageUpload";
 
-import { CafeType } from "../../utils/types";
+import { CafeType, ErrorObject } from "../../utils/types";
 import { FieldConstant } from "../../utils/constant";
 import { CafesContext } from "./context";
 import SearchAddress from "../Common/Inputs/SearchAddress";
+import { isErrorOnSubmit } from "../../utils/helper";
+import FormAlert from "../Common/FormAlert";
 
 const ActionDrawer = memo(() => {
+  const [isError, setErrorBanner] = useState(false);
   const { isOpen, onClose, method } = useContext(CafesContext);
-
-  const { handleSubmit } = method;
   const { handleFormSubmit, onExit, cafeId } = useFormAction();
+
+  const { handleSubmit, watch, clearErrors } = method;
+
+  const { cafeName, description, location } = watch();
 
   const onSubmit: SubmitHandler<CafeType> = (values) => {
     handleFormSubmit(values);
   };
 
   const onError: SubmitErrorHandler<CafeType> = (value) => {
-    // handle error message
+    setErrorBanner(isErrorOnSubmit(value as ErrorObject));
   };
+
+  const onCloseAlert = () => {
+    setErrorBanner(false);
+    clearErrors();
+  };
+
+  useEffect(() => {
+    setErrorBanner(false);
+  }, [cafeName, description, location, isOpen]);
 
   return (
     <FormProvider {...method}>
@@ -42,6 +56,7 @@ const ActionDrawer = memo(() => {
         maskClosable={false}
       >
         <Form layout="vertical" hideRequiredMark>
+          {isError && <FormAlert onCloseAlert={onCloseAlert} />}
           <Row gutter={16}>
             <Col span={12}>
               <TextInput

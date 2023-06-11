@@ -24,7 +24,7 @@ const getEmployees = asyncHandler(async (req, res, next) => {
     if (cafeId) {
       query = query.where("cafeId", cafeId);
     }
-    query = query.sort("-daysWorkedInCafe").lean();
+    // query = query.sort("-daysWorkedInCafe").lean();
 
     const employees = await query.exec();
 

@@ -75,11 +75,19 @@ function EmployeesTable() {
     });
   };
 
+  const sortedEmployees = useMemo(() => {
+    return employeesData.employees
+      .filter((employee) => employee.daysWorkedInCafe !== undefined)
+      .sort((a, b) => b.daysWorkedInCafe! - a.daysWorkedInCafe!);
+  }, [employeesData.employees]);
+
+
+
   return (
     <div className="ag-theme-alpine">
       <AgGridReact
         domLayout="autoHeight"
-        rowData={employeesData.employees}
+        rowData={sortedEmployees}
         defaultColDef={defaultColDef}
         columnDefs={columnDefs}
         animateRows

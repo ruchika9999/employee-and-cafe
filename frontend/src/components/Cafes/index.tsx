@@ -33,6 +33,7 @@ const Employees = () => {
   const showDrawer = (id?: string) => {
     setCafeId(id);
     if (id) setFormValues(id, method.setValue);
+    method.clearErrors();
     setOpen(true);
   };
 

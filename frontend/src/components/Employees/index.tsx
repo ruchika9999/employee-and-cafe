@@ -54,6 +54,7 @@ const Employees = () => {
     setEmployeeId(id);
     // set form values if id is present to edit employee
     if (id) setFormValues(id, employeesData.employees, method.setValue);
+    method.clearErrors();
     setOpen(true);
   };
 

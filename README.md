@@ -1,4 +1,4 @@
-# cafe-management
+# employee-and-cafe
 
 # Getting Started 
 

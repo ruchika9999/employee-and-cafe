@@ -35,6 +35,7 @@ export enum FieldConstant {
   CAFE_ID = "cafeId",
   LOGO = "logo",
   PRV_CAFE_ID = "prvCafeId",
+  START_DATE = "startDate",
 }
 
 export enum GenderOptions {
@@ -56,7 +57,6 @@ export const resetConfirm: ModalFuncProps = {
   cancelText: "No",
 };
 
-
 export const gender = Object.keys(GenderOptions).filter((item) => {
   return isNaN(Number(item));
 });
@@ -71,6 +71,8 @@ export const employeeSchema = z.object({
   [FieldConstant.EMAIL]: z.string(),
   [FieldConstant.PHONE_NUMBER]: z.number().max(8).or(z.string().default("")),
   [FieldConstant.DAYS_WORKED_IN_CAFE]: z.number().default(0).optional(),
+      // FieldConstant.DAYS_WORKED_IN_CAFE this one generate for testing purpose
+      // will be removed later
   [FieldConstant.CAFE_OPTION]: z
     .object({
       value: z.string(),
@@ -82,6 +84,7 @@ export const employeeSchema = z.object({
   [FieldConstant.GENDER]: z.enum(["Male", "Female"]).or(z.string().default("")),
   [FieldConstant.CAFE_ID]: z.string().optional(),
   [FieldConstant.PRV_CAFE_ID]: z.string().optional(),
+  [FieldConstant.START_DATE]: z.string().optional(),
 });
 
 export const getDefaultEmployeeForm = () => {

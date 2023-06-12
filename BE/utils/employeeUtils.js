@@ -28,6 +28,8 @@ const generateEmployeeObj = (
     phoneNumber,
     emailAddress,
     employeeName,
+    // after days different logic implemented this will be changed
+    // this one generate for testing purpose
     daysWorkedInCafe: generateNumber(1, 30),
     cafeId: cafeOption?.value,
     cafeName: cafeOption?.placeName,

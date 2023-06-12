@@ -28,6 +28,8 @@ const employeesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // after days different logic implemented this will be changed
+  // this one generate for testing purpose
   daysWorkedInCafe: {
     type: Number,
   },

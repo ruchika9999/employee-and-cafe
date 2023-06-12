@@ -17,6 +17,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `npm install`
 ### `npm run dev`
 
+
+
+```diff
+- Note : Missing feature 
+Number of days the employee worked
+It must be an integer and is derived from the current date minus the start date of the employee in the cafe
+
+Foget to update this logic
+```
+
 Runs the bakend development mode.
 Open [http://localhost:5001]
 

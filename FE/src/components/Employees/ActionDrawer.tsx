@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Col, Drawer, Form, Row, Space, Divider } from "antd";
 import { useSelector } from "react-redux";
 import {
@@ -39,10 +39,10 @@ const ActionDrawer = () => {
     setErrorBanner(isErrorOnSubmit(value as ErrorObject));
   };
 
-  const onCloseAlert = () => {
+  const onCloseAlert = useCallback(() => {
     setErrorBanner(false);
     clearErrors();
-  };
+  }, []);
 
   useEffect(() => {
     setErrorBanner(false);

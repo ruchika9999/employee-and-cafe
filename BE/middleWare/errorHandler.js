@@ -27,7 +27,6 @@ const errorHandler = async (err, req, res, next) => {
         .status(statusCode)
         .json({ title: ERROR_MESSAGE.SERVER_ERROR, message: err.message });
     default:
-      console.log(ERROR_MESSAGE.DEFAULT, err);
       break;
   }
 };

@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Col, Divider, Drawer, Form, Row, Space } from "antd";
 import {
   FormProvider,
@@ -19,7 +19,7 @@ import SearchAddress from "../Common/Inputs/SearchAddress";
 import { isErrorOnSubmit } from "../../utils/helper";
 import FormAlert from "../Common/FormAlert";
 
-const ActionDrawer = memo(() => {
+const ActionDrawer = () => {
   const [isError, setErrorBanner] = useState(false);
   const { isOpen, onClose, method } = useContext(CafesContext);
   const { handleFormSubmit, onExit, cafeId } = useFormAction();
@@ -36,10 +36,10 @@ const ActionDrawer = memo(() => {
     setErrorBanner(isErrorOnSubmit(value as ErrorObject));
   };
 
-  const onCloseAlert = () => {
+  const onCloseAlert = useCallback(() => {
     setErrorBanner(false);
     clearErrors();
-  };
+  }, []);
 
   useEffect(() => {
     setErrorBanner(false);
@@ -106,6 +106,6 @@ const ActionDrawer = memo(() => {
       </Drawer>
     </FormProvider>
   );
-});
+};
 
 export default ActionDrawer;

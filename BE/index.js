@@ -1,22 +1,27 @@
 require("dotenv").config();
+
 const http = require("http");
-let server = require("./server");
+const app = require("./app");
+const connectDb = require("./config/dbConnection");
 
 const port = normalizePort(process.env.PORT || 5001);
 
-server.set("port", port);
+const init = async () => {
+  try {
+    const server = http.createServer(app);
 
-try {
-  server = http.createServer(server);
+    await connectDb();
 
-  console.log(`Server listening on port ${port}`);
-  server.listen(port);
+    server.listen(port, () => {
+      console.log(`Server listening on port ${port}`);
+    });
 
-  server.on("error", onError);
-  server.on("listening", onListening);
-} catch (ex) {
-  console.log(ex);
-}
+    server.on("error", onError);
+  } catch (ex) {
+    console.log(ex);
+    process.exit(1);
+  }
+};
 
 function normalizePort(val) {
   const port = typeof val === "string" ? parseInt(val, 10) : val;
@@ -49,7 +54,4 @@ function onError(error) {
   }
 }
 
-function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-}
+init();
